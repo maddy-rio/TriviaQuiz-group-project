@@ -80,13 +80,20 @@ export default function Trivia() {
 
   return (
     <div>
-      <h1>Trivia</h1>
       {quizOver ? (
-        <p>Trivia quiz is over! Your score: {score}</p>
+        <>
+          <h2 className="quiz-over">Trivia quiz is over!</h2>
+          <h3>
+            Your score: <span>{score}</span>
+          </h3>
+          <a className="btn btn-dark" role="button" href="/">
+            Play again
+          </a>
+        </>
       ) : (
         <>
           {trivia && trivia.results[currentQuestionIndex] ? (
-            <p>{trivia.results[currentQuestionIndex].question}</p>
+            <h2>{trivia.results[currentQuestionIndex].question}</h2>
           ) : (
             <p>Loading...</p>
           )}
