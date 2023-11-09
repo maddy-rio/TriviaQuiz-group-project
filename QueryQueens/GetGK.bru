@@ -1,0 +1,17 @@
+meta {
+  name: GetGK
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://opentdb.com/api.php?amount=10&category=9&type=multiple
+  body: none
+  auth: none
+}
+
+query {
+  amount: 10
+  category: 9
+  type: multiple
+}
