@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 
-// import  Trivia from './Trivia.tsx'
-// import Animals from './animals.tsx'
-import GeneralKnowledge  from './generalKnowledge.tsx'
+import  Trivia from './Trivia.tsx'
+import Animals from './Animals.tsx'
+import GeneralKnowledge  from './GeneralKnowledge.tsx'
 
  export default function App() {
   return (
