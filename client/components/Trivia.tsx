@@ -1,8 +1,15 @@
-import { SetStateAction, useEffect, useState } from 'react'
+import {
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react'
 import { getTrivia } from '../apiClient.ts'
 import { Trivia as TriviaType } from '../../models/trivia.ts'
 
-function shuffleArray(array) {
+function shuffleArray(array: string | any[]): any {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
@@ -68,15 +75,27 @@ export default function Trivia() {
 
   //shuffle and display answers
   const shuffledAnswers = shuffleArray(answers)
-  const displayAnswers = shuffledAnswers.map((answer, index) => (
-    <button
-      key={index}
-      onClick={() => handleAnswerClick(answer)}
-      className={selectedAnswer === answer ? 'selected' : ''}
-    >
-      {answer}
-    </button>
-  ))
+  const displayAnswers = shuffledAnswers.map(
+    (
+      answer:
+        | string
+        | number
+        | boolean
+        | ReactElement<any, string | JSXElementConstructor<any>>
+        | Iterable<ReactNode>
+        | null
+        | undefined,
+      index: Key | null | undefined
+    ) => (
+      <button
+        key={index}
+        onClick={() => handleAnswerClick(answer)}
+        className={selectedAnswer === answer ? 'selected' : ''}
+      >
+        {answer}
+      </button>
+    )
+  )
 
   return (
     <div>
