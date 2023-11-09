@@ -1,0 +1,17 @@
+meta {
+  name: GetAnimals
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://opentdb.com/api.php?amount=10&category=27&type=multiple
+  body: none
+  auth: none
+}
+
+query {
+  amount: 10
+  category: 27
+  type: multiple
+}

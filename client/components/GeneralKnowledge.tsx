@@ -1,6 +1,6 @@
 import { SetStateAction, useEffect, useState } from 'react'
-import { getTrivia } from '../apiClient.ts'
-import { Trivia as TriviaType } from '../../models/Trivia.ts'
+import { getGeneralKnowledge } from '../apiClient.ts'
+import { GeneralKnowledge as TriviaType } from '../../models/generalKnowledge.ts'
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -22,7 +22,7 @@ export default function Trivia() {
   //fetch the data
   async function fetchTrivia() {
     try {
-      const triviaData = await getTrivia()
+      const triviaData = await getGeneralKnowledge()
       setTrivia(triviaData)
     } catch (error) {
       console.log(error)
