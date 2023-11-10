@@ -106,7 +106,16 @@ export default function Trivia() {
             Your score: <span>{score}</span>
           </h3>
           <a className="btn btn-dark" role="button" href="/">
-            Play again
+            Home
+          </a>
+          <a className="btn btn-dark" role="button" href="/GeneralKnowledge">
+            Play Again
+          </a>
+          <a className="btn btn-dark" role="button" href="/Mythology">
+            Try Mythology
+          </a>
+          <a className="btn btn-dark" role="button" href="/Animals">
+            Try Animals
           </a>
         </>
       ) : (
