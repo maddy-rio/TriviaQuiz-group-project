@@ -3,7 +3,7 @@ import { getAnimals } from '../apiClient.ts'
 import { Animals as TriviaType } from '../../models/Animals.ts'
 
 // Function to shuffle an array
-function shuffleArray(array) {
+function shuffleArray(array: any) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
@@ -76,7 +76,7 @@ export default function Trivia() {
   const shuffledAnswers = shuffleArray(answers)
 
   // Map the shuffled answers to buttons
-  const displayAnswers = shuffledAnswers.map((answer, index) => (
+  const displayAnswers = shuffledAnswers.map((answer: any, index: any) => (
     <button
       key={index}
       onClick={() => handleAnswerClick(answer)}
