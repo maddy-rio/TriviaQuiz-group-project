@@ -87,8 +87,8 @@ export default function Trivia() {
         backgroundColor:
           selectedAnswer !== null
             ? answer === trivia?.results[currentQuestionIndex].correct_answer
-              ? 'rgba(0, 150, 0, 0.8)' 
-              : 'rgba(255, 0, 0, 0.8)' 
+              ? 'rgba(66, 175, 172, 0.5)'
+              : 'rgba(198, 61, 43, 0.5)'
             : 'transparent',
       }}
     >
@@ -105,7 +105,7 @@ export default function Trivia() {
           <h3>
             Your score: <span>{score}</span>
           </h3>
-          <a className="btn btn-dark" role="button" href="/">
+          <a className="btn btn-danger" role="button" href="/">
             Home
           </a>
           <a className="btn btn-dark" role="button" href="/GeneralKnowledge">
