@@ -1,15 +1,9 @@
-import {
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react'
+import { useEffect, useState } from 'react'
 import { getTrivia } from '../apiClient.ts'
 import { Trivia as TriviaType } from '../../models/Trivia.ts'
 
-function shuffleArray(array: string | any[]): any {
+// Function to shuffle an array
+function shuffleArray(array: any) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
     ;[array[i], array[j]] = [array[j], array[i]]
@@ -17,86 +11,92 @@ function shuffleArray(array: string | any[]): any {
   return array
 }
 
-// Export function
 export default function Trivia() {
+  // State variables
   const [trivia, setTrivia] = useState<TriviaType | null>(null)
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>()
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
   const [score, setScore] = useState(0)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [quizOver, setQuizOver] = useState(false)
-  const [totalQuestions, setTotalQuestions] = useState(10)
+  const [answerStatus, setAnswerStatus] = useState<string | null>(null)
 
-  //fetch the data
-  async function fetchTrivia() {
-    try {
-      const triviaData = await getTrivia()
-      setTrivia(triviaData)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
+  // Fetch trivia data on component mount
   useEffect(() => {
-    try {
-      fetchTrivia()
-    } catch (error) {
-      console.log(error)
+    async function fetchTrivia() {
+      try {
+        const triviaData = await getTrivia()
+        setTrivia(triviaData)
+      } catch (error) {
+        console.log(error)
+      }
     }
+
+    fetchTrivia()
   }, [])
 
-  //handle the score and track the question numbers
+  // Function to handle answer click
   const handleAnswerClick = (answer: string | null) => {
     if (trivia && currentQuestionIndex < trivia.results.length) {
-      if (answer === trivia?.results[currentQuestionIndex].correct_answer) {
-        console.log('correct answer')
+      let isCorrect = false
+
+      // Check if the selected answer is correct
+      if (answer === trivia.results[currentQuestionIndex].correct_answer) {
         setScore(score + 1)
-      } else {
-        console.log('Incorrect')
+        isCorrect = true
       }
+
+      // Set the selected answer
       setSelectedAnswer(answer)
 
-      if (currentQuestionIndex < totalQuestions - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
-        setSelectedAnswer(null)
+      // Move to the next question or end the quiz if all questions answered
+      if (currentQuestionIndex < trivia.results.length - 1) {
+        // Use setTimeout to simulate a delay before moving to the next question
+        setTimeout(() => {
+          setCurrentQuestionIndex(currentQuestionIndex + 1)
+          setSelectedAnswer(null)
+        }, 1500)
       } else {
-        console.log('All questions answered. Quiz over.')
         setQuizOver(true)
       }
+
+      // Update the class based on correctness
+      setAnswerStatus(isCorrect ? 'green' : 'red')
     }
   }
 
-  //Add the correct answer to the incorrect answers
+  // Get the answers for the current question
   const answers = trivia
     ? [
         trivia.results[currentQuestionIndex].correct_answer,
-        ...(trivia?.results[currentQuestionIndex].incorrect_answers ?? []),
+        ...(trivia.results[currentQuestionIndex].incorrect_answers ?? []),
       ]
     : []
 
-  //shuffle and display answers
+  // Shuffle the answers
   const shuffledAnswers = shuffleArray(answers)
-  const displayAnswers = shuffledAnswers.map(
-    (
-      answer:
-        | string
-        | number
-        | boolean
-        | ReactElement<any, string | JSXElementConstructor<any>>
-        | Iterable<ReactNode>
-        | null
-        | undefined,
-      index: Key | null | undefined
-    ) => (
-      <button
-        key={index}
-        onClick={() => handleAnswerClick(answer)}
-        className={selectedAnswer === answer ? 'selected' : ''}
-      >
-        {answer}
-      </button>
-    )
-  )
 
+  // Map the shuffled answers to buttons
+  const displayAnswers = shuffledAnswers.map((answer: any, index: any) => (
+    <button
+      key={index}
+      onClick={() => handleAnswerClick(answer)}
+      className={`${selectedAnswer === answer ? 'selected' : ''} ${
+        answerStatus || ''
+      }`}
+      style={{
+        backgroundColor:
+          selectedAnswer !== null
+            ? answer === trivia?.results[currentQuestionIndex].correct_answer
+              ? 'rgba(0, 150, 0, 0.8)'
+              : 'rgba(255, 0, 0, 0.8)'
+            : 'transparent',
+      }}
+    >
+      {answer}
+    </button>
+  ))
+
+  // Render the component
   return (
     <div>
       {quizOver ? (

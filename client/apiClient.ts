@@ -1,7 +1,7 @@
 import request from 'superagent'
 import { Trivia } from '../models/Trivia.ts'
-import { GeneralKnowledge } from '../models/generalKnowledge.ts'
-import { Animals } from '../models/animals.ts'
+import { GeneralKnowledge } from '../models/GeneralKnowledge.ts'
+import { Animals } from '../models/Animals.ts'
 
 export async function getTrivia(): Promise<Trivia> {
   const response = await request.get(
