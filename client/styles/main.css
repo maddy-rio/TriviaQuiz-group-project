@@ -105,6 +105,18 @@ button:before {
   width: 100%;
   z-index: -1;
 }
+a.btn.btn-danger {
+  opacity: 1;
+  margin-top: 50px;
+  font-size: 20px;
+  min-width: 150px;
+  font-family: 'Gothic A1';
+  font-weight: 700;
+  color: #fff;
+  background-color: #cf4836;
+  border-color: #cf4836;
+  margin-left: 20px;
+}
 
 a.btn.btn-dark {
   opacity: 1;
@@ -116,8 +128,10 @@ a.btn.btn-dark {
   color: #fff;
   background-color: #13334f;
   border-color: #13334f;
+  margin-left: 20px;
 }
-a.btn.btn-dark:hover {
+a.btn.btn-dark:hover,
+a.btn.btn-danger:hover {
   opacity: 0.9;
 }
 .home a {

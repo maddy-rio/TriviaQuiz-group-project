@@ -105,15 +105,15 @@ export default function Trivia() {
           <h3>
             Your score: <span>{score}</span>
           </h3>
-          <a className="btn btn-dark" role="button" href="/">
+          <a className="btn btn-danger" role="button" href="/">
             Home
           </a>
-          <a className="btn btn-dark" role="button" href="/Animals">
+          <a className="btn btn-dark" role="button" href="/Trivia">
             Play Again
           </a>
 
-          <a className="btn btn-dark" role="button" href="/Mythology">
-            Try Mythology
+          <a className="btn btn-dark" role="button" href="/Animals">
+            Try Animals
           </a>
 
           <a className="btn btn-dark" role="button" href="/GeneralKnowledge">
